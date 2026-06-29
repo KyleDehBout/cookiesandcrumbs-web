@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cookies &amp; Crumbs: Custom Sugar Cookies · Broward, FL</title>
+<meta name="description" content="Custom sugar cookies & chocolate-covered treats hand-piped fresh to order. Pickup & local delivery in Broward, FL.">
+<!-- Open Graph / social card -->
+<meta property="og:type"        content="website">
+<meta property="og:title"       content="Cookies &amp; Crumbs: Custom Sugar Cookies · Broward, FL">
+<meta property="og:description" content="Hand-piped custom sugar cookies & chocolate-covered treats, made to order in Broward, FL. Every design personalized to your theme.">
+<meta property="og:image"       content="Photos/web/IMG_2765.jpeg">
+<meta name="twitter:card"       content="summary_large_image">
+<!-- Favicon: C&C monogram in mauve -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23824A61'/><text x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia%2Cserif' font-style='italic' font-size='13' fill='%23FFFDFB'>C%26C</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* ── Design tokens ──────────────────────────────────────────── */
+:root {
+  --blush-50:  #FBF2F2;
+  --blush-100: #F7E7E7;
+  --blush-200: #F2D9D9;
+  --blush-300: #E9C6C9;
+  --rose-300:  #D29CAF;
+  --mauve-500: #B5708A;
+  --mauve-600: #9E5C77;
+  --mauve-700: #824A61;
+  --mauve-800: #5F3547;
+  --cream-50:  #FFFDFB;
+  --cream-100: #FDF8F3;
+  --ink-900:   #3B2A30;
+  --ink-700:   #6A565D;
+
+  --surface-page:    var(--blush-200);
+  --surface-card:    var(--cream-100);
+  --surface-inverse: var(--mauve-800);
+  --text-heading:    var(--mauve-800);
+  --text-body:       var(--ink-900);
+  --text-muted:      var(--ink-700);
+  --text-on-accent:  var(--cream-50);
+  --text-accent:     var(--mauve-700);  /* dark enough for AA contrast on all surfaces */
+  --accent:          var(--mauve-500);  /* decorative: borders, overlays, watermarks */
+  --accent-hover:    var(--mauve-600);
+  --border-soft:     #E7D2D4;
+  --border-accent:   var(--rose-300);
+
+  --nav-glass-idle:     rgba(242,217,217,.78);  /* blush-200 at 78% */
+  --nav-glass-scrolled: rgba(242,217,217,.94);  /* blush-200 at 94% */
+
+  --shadow-xs:     0 1px 2px rgba(95,53,71,.06);
+  --shadow-sm:     0 2px 8px rgba(95,53,71,.08);
+  --shadow-md:     0 8px 28px rgba(95,53,71,.11);
+  --shadow-lg:     0 20px 52px rgba(95,53,71,.16);
+  --shadow-accent: 0 10px 32px rgba(130,74,97,.28);  /* mauve-700 tinted */
+
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+  --img-radius:  16px;
+
+  --ease-soft: cubic-bezier(0.22,0.61,0.36,1);
+  --ease-out:  cubic-bezier(0.16,1,0.3,1);
+  --dur-fast:  150ms;
+  --dur-base:  260ms;
+  --dur-slow:  440ms;
+
+  --font-display: 'Cormorant Garamond','Times New Roman',serif;
+  --font-sans:    'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --tracking-caps: .18em;
+
+  --hero-bg: radial-gradient(130% 100% at 50% 0%, var(--blush-100) 0%, var(--blush-200) 55%, var(--blush-300) 120%);
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*,*::before,*::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html,body { margin:0; padding:0; }
+a { text-decoration:none; color:inherit; }
+button { font-family:inherit; cursor:pointer; }
+img { display:block; max-width:100%; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-body);
+  background: var(--surface-page);
+  overflow-x: hidden;
+}
+
+/* ── Skip link ──────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  background: var(--surface-inverse);
+  color: var(--cream-50);
+  padding: 8px 20px;
+  border-radius: var(--radius-md);
+  font-size: .875rem;
+  font-weight: 500;
+  z-index: 200;
+  transition: top var(--dur-fast);
+}
+.skip-link:focus { top: 8px; }
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes cc-marquee {
+  from { transform: translateX(0) }
+  to   { transform: translateX(-50%) }
+}
+
+/* ── Reveal (opacity + transform, JS-gated so no-JS always sees content) */
+.js [data-reveal] {
+  opacity: 0;
+  transition: opacity 640ms var(--ease-out), transform 720ms var(--ease-out);
+}
+.js [data-reveal]:not([data-dir]),
+.js [data-reveal][data-dir="up"]    { transform: translateY(34px); }
+.js [data-reveal][data-dir="left"]  { transform: translateX(-42px); }
+.js [data-reveal][data-dir="right"] { transform: translateX(42px); }
+.js [data-reveal][data-dir="scale"] { transform: scale(.90); }
+.js [data-reveal][data-dir="fade"]  { transform: none; }
+.js [data-reveal].on { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion:reduce) {
+  .js [data-reveal] { opacity:1!important; transform:none!important; transition:none!important; }
+  .marquee-track { animation:none!important; }
+}
+
+/* ── Text curtain reveal (line-by-line slide up) ────────────── */
+/* Each line lives in .tl (overflow:hidden) + .tl-inner (the moving part) */
+.tl { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.js .tl-inner {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 980ms var(--ease-out) var(--d, 0ms);
+}
+/* hero h1: fires on page-loaded class added after initial paint */
+.js.page-loaded .hero-h1 .tl-inner { transform: translateY(0); }
+/* about h2: fires when .about-copy gets .text-on via IO */
+.js .about-copy.text-on .tl-inner { transform: translateY(0); }
+
+/* ── About photo parallax (CSS scroll-driven) ───────────────── */
+@keyframes about-photo-drift {
+  from { transform: translateY(52px); }
+  to   { transform: translateY(-52px); }
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .about-photo {
+      animation: about-photo-drift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+
+/* ── Announce ───────────────────────────────────────────────── */
+.announce {
+  background: var(--mauve-700);
+  color: var(--cream-50);
+  text-align: center;
+  font-size: 12.5px;
+  letter-spacing: .05em;
+  font-weight: 500;
+  padding: 9px 20px;
+}
+
+/* ── Nav ────────────────────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px clamp(20px,5vw,48px);
+  background: var(--nav-glass-idle);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-soft);
+  transition: background var(--dur-base) var(--ease-soft), box-shadow var(--dur-base) var(--ease-soft);
+}
+.nav.scrolled {
+  background: var(--nav-glass-scrolled);
+  box-shadow: var(--shadow-sm);
+}
+
+.logo {
+  user-select: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  height: 54px;
+  width: 54px;
+  display: block;
+}
+.logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 50%; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* nav text buttons */
+.nav-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-body);
+  cursor: pointer;
+  transition: color var(--dur-base) var(--ease-soft);
+}
+.nav-link:hover { color: var(--text-accent); }
+.nav-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-heading);
+  border-radius: 2px;
+  transition: transform var(--dur-base) var(--ease-soft), opacity var(--dur-base);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-drawer {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--surface-card);
+  border-bottom: 1px solid var(--border-soft);
+  flex-direction: column;
+  padding: 6px 24px 20px;
+  box-shadow: var(--shadow-md);
+}
+.nav-drawer.open { display: flex; }
+.nav-drawer .nav-link {
+  font-size: 16px;
+  padding: 13px 0;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+}
+.nav-drawer .drawer-cta { padding-top: 16px; }
+
+@media (max-width: 759px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.btn {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: .025em;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background var(--dur-base) var(--ease-soft),
+    border-color var(--dur-base) var(--ease-soft),
+    transform var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-base) var(--ease-soft);
+}
+.btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.btn:active { transform: translateY(1px) scale(.99)!important; }
+
+.btn-sm  { padding:  8px 20px;  font-size: .8125rem; }
+.btn-md  { padding: 12px 28px;  font-size: .9375rem; }
+.btn-lg  { padding: 16px 40px;  font-size: 1.0625rem; }
+
+.btn-primary {
+  background: var(--mauve-700);
+  color: var(--text-on-accent);
+  border: 1px solid var(--mauve-700);
+  box-shadow: var(--shadow-accent);
+}
+.btn-primary:hover {
+  background: var(--mauve-600);
+  border-color: var(--mauve-600);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(130,74,97,.38);
+}
+.btn-secondary {
+  background: var(--surface-card);
+  color: var(--text-accent);
+  border: 1px solid var(--border-accent);
+  box-shadow: var(--shadow-xs);
+}
+.btn-secondary:hover {
+  background: var(--blush-50);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Section label ──────────────────────────────────────────── */
+.label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: .73rem;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.label .hl {
+  display: inline-block;
+  width: 34px; height: 1px;
+  background: currentColor;
+  opacity: .45;
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--hero-bg);
+  padding: clamp(72px,12vw,136px) clamp(20px,5vw,48px) clamp(84px,13vw,148px);
+  text-align: center;
+}
+.hero-inner {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.hero h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(46px,7.8vw,90px);
+  line-height: 1.02;
+  color: var(--text-heading);
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+.hero p {
+  margin: 0;
+  max-width: 490px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* ── Marquee ────────────────────────────────────────────────── */
+.marquee-wrap {
+  overflow: hidden;
+  background: var(--surface-card);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 14px 0;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: cc-marquee 38s linear infinite;
+}
+.marquee-half {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  padding-right: 34px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 24px;
+  color: var(--text-accent);
+  white-space: nowrap;
+}
+.marquee-half .dot { opacity: .4; }
+
+/* ── About ──────────────────────────────────────────────────── */
+.about {
+  background: var(--surface-card);
+  padding: clamp(72px,10vw,112px) clamp(20px,5vw,48px);
+}
+.about-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+  display: flex;
+  gap: clamp(36px,6vw,80px);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.about-copy {
+  flex: 1 1 330px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+.about-copy h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px,4.4vw,48px);
+  line-height: 1.1;
+  color: var(--text-heading);
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+.about-copy p {
+  margin: 0;
+  max-width: 480px;
+  font-size: 16.5px;
+  line-height: 1.74;
+  color: var(--text-muted);
+}
+.about-copy .sig {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 23px;
+  color: var(--text-accent);
+  margin-top: 4px;
+}
+.about-photo {
+  flex: 1 1 300px;
+  min-width: 280px;
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.about-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(95,53,71,.18) 100%);
+  pointer-events: none;
+}
+
+/* ── Menu ───────────────────────────────────────────────────── */
+.menu-section {
+  background: var(--surface-page);
+  padding: clamp(72px,10vw,112px) clamp(20px,5vw,48px);
+}
+.section-head {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: clamp(40px,5vw,60px);
+}
+.section-head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px,4.6vw,48px);
+  color: var(--text-heading);
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+.cards {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 28px;
+}
+
+/* Product card */
+.card {
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform var(--dur-base) var(--ease-soft),
+    box-shadow var(--dur-base) var(--ease-soft);
+}
+.card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.card-img {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--blush-100);
+}
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-soft);
+}
+.card:hover .card-img img { transform: scale(1.05); }
+.card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(95,53,71,.22) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.card-body {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+.card-body h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--text-heading);
+  line-height: 1.15;
+}
+.card-body p {
+  margin: 0;
+  font-size: .9375rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.card-body .card-link {
+  margin-top: 4px;
+  font-size: .8125rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text-accent);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap var(--dur-base) var(--ease-soft);
+}
+.card:hover .card-link { gap: 10px; }
+
+/* ── Gallery ────────────────────────────────────────────────── */
+.gallery {
+  background: var(--surface-card);
+  padding: clamp(72px,10vw,112px) clamp(16px,4vw,40px);
+}
+.gallery-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 580px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
+/* gallery cell stagger reveal */
+.js .gallery-cell {
+  opacity: 0;
+  transform: translateY(60px) scale(0.93);
+  transition:
+    opacity  700ms var(--ease-out) calc(var(--ci, 0) * 85ms),
+    transform 820ms var(--ease-out) calc(var(--ci, 0) * 85ms);
+}
+.gallery-grid.reveal-in .gallery-cell {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .gallery-cell { opacity: 1 !important; transform: none !important; }
+}
+
+.gallery-cell {
+  aspect-ratio: 4/5;
+  border-radius: var(--img-radius);
+  overflow: hidden;
+  position: relative;
+  background: var(--blush-100);
+}
+.gallery-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 560ms var(--ease-soft);
+}
+.gallery-grid.reveal-in .gallery-cell:hover img { transform: scale(1.07); }
+.gallery-cell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(95,53,71,0);
+  transition: background var(--dur-base) var(--ease-soft);
+  pointer-events: none;
+}
+.gallery-grid.reveal-in .gallery-cell:hover::after { background: rgba(95,53,71,.10); }
+.gallery-footer { text-align: center; margin-top: 40px; }
+
+/* ── Order CTA ──────────────────────────────────────────────── */
+.order-cta {
+  background: var(--hero-bg);
+  padding: clamp(80px,12vw,128px) clamp(20px,5vw,48px);
+  text-align: center;
+}
+.order-inner {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.order-flourish {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--text-accent);
+  opacity: .65;
+}
+.order-flourish .fl-line { width: 40px; height: 1px; background: currentColor; }
+.order-cta h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(34px,5.4vw,62px);
+  line-height: 1.04;
+  color: var(--text-heading);
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+.order-cta p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+footer {
+  background: var(--surface-inverse);
+  color: var(--cream-100);
+  padding: clamp(52px,8vw,80px) clamp(20px,5vw,48px) 44px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1;
+}
+.footer-logo .amp { color: var(--rose-300); }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 24px;
+  font-size: 14px;
+  opacity: .82;
+}
+.footer-links a { transition: opacity var(--dur-base); }
+.footer-links a:hover { opacity: 1; }
+.footer-sep {
+  width: min(440px,80%);
+  height: 1px;
+  background: rgba(255,255,255,.14);
+  margin: 10px 0 6px;
+}
+.footer-copy { font-size: 12px; letter-spacing: .05em; opacity: .55; }
+
+/* ── Grain overlay ──────────────────────────────────────────── */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: .048;
+  mix-blend-mode: multiply;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+</style>
+</head>
+<body>
+
+<!-- Flag JS presence before first paint so .js [data-reveal] opacity:0 applies -->
+<script>document.documentElement.classList.add('js');</script>
+
+<!-- Skip link -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Announce -->
+<div class="announce">Now booking custom orders &nbsp;♥&nbsp; Broward, FL pickup &amp; local delivery</div>
+
+<!-- Nav -->
+<header class="nav" id="nav">
+  <button class="logo" onclick="navTo('home')" aria-label="Cookies and Crumbs: scroll to top">
+    <img src="Cookies_and_Crumbs_Transparent.png" alt="" width="48" height="48">
+  </button>
+  <nav class="nav-links" aria-label="Primary">
+    <button class="nav-link" onclick="navTo('home')">Home</button>
+    <button class="nav-link" onclick="navTo('about')">About</button>
+    <button class="nav-link" onclick="navTo('menu')">Menu</button>
+    <button class="btn btn-primary btn-sm" onclick="openOrder()">Order</button>
+  </nav>
+  <button class="hamburger" id="hbg" aria-label="Open menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-drawer" id="drawer" role="navigation" aria-label="Mobile menu">
+    <button class="nav-link" onclick="navTo('home')">Home</button>
+    <button class="nav-link" onclick="navTo('about')">About</button>
+    <button class="nav-link" onclick="navTo('menu')">Menu</button>
+    <div class="drawer-cta">
+      <button class="btn btn-primary btn-md" onclick="openOrder()">Place an order</button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div data-reveal data-dir="fade">
+      <span class="label"><span class="hl"></span>Made to order · Broward, FL<span class="hl"></span></span>
+    </div>
+    <h1 class="hero-h1" aria-label="Made with love, designed for you.">
+      <span class="tl"><span class="tl-inner">Made with love,</span></span>
+      <span class="tl" style="--d:140ms"><span class="tl-inner">designed for you.</span></span>
+    </h1>
+    <p data-reveal data-delay="190">Custom cookies &amp; chocolate-covered treats, hand-piped fresh to order and personalized down to the smallest detail.</p>
+    <div class="hero-ctas" data-reveal data-delay="270">
+      <button class="btn btn-primary btn-lg" onclick="openOrder()">Place an order</button>
+      <button class="btn btn-secondary btn-lg" onclick="navTo('menu')">Browse the menu</button>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee-track" aria-hidden="true">
+    <div class="marquee-half">
+      <span>Book 2 weeks ahead</span><span class="dot">♥</span>
+      <span>All designs custom-made</span><span class="dot">♥</span>
+      <span>Pickup in Broward, FL</span><span class="dot">♥</span>
+      <span>Local delivery available</span><span class="dot">♥</span>
+      <span>Every order hand-piped to your theme</span><span class="dot">♥</span>
+    </div>
+    <div class="marquee-half">
+      <span>Book 2 weeks ahead</span><span class="dot">♥</span>
+      <span>All designs custom-made</span><span class="dot">♥</span>
+      <span>Pickup in Broward, FL</span><span class="dot">♥</span>
+      <span>Local delivery available</span><span class="dot">♥</span>
+      <span>Every order hand-piped to your theme</span><span class="dot">♥</span>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-copy">
+      <h2 class="about-h2" aria-label="Born from love. Built with faith.">
+        <span class="tl"><span class="tl-inner">Born from love.</span></span>
+        <span class="tl" style="--d:130ms"><span class="tl-inner">Built with faith.</span></span>
+      </h2>
+      <p data-reveal data-dir="left" data-delay="80">I grew up in Jamaica keeping my mother company in the kitchen as she filled late-night dessert orders: flour on the counter, music low, and a whole lot of love in every batch.</p>
+      <p data-reveal data-dir="left" data-delay="150">Cookies &amp; Crumbs began during the quiet of 2020 as a creative outlet, and grew into something I pour my heart into every day. Today I bake for Broward: clean, detailed, personalized designs made for your people and your moments.</p>
+      <p class="sig" data-reveal data-dir="left" data-delay="210">Kacey</p>
+    </div>
+    <div class="about-photo">
+      <picture>
+        <source type="image/avif" srcset="Photos/web/IMG_4807.avif">
+        <img src="Photos/web/IMG_4807.jpeg" alt="Kacey, owner of Cookies &amp; Crumbs, in her kitchen" loading="lazy" width="700" height="1049">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<!-- What We Make -->
+<section class="menu-section" id="menu">
+  <div class="section-head" data-reveal>
+    <h2>Every order, made for you.</h2>
+  </div>
+  <div class="cards">
+    <div data-reveal data-delay="0">
+      <div class="card" onclick="openOrder()" tabindex="0" role="button" aria-label="Order custom sugar cookies">
+        <div class="card-img">
+          <picture>
+            <source type="image/avif" srcset="Photos/web/IMG_2765.avif">
+            <img src="Photos/web/IMG_2765.jpeg" alt="Custom sugar cookies, bridal shower set" loading="lazy" width="900" height="675">
+          </picture>
+        </div>
+        <div class="card-body">
+          <h3>Custom Sugar Cookies</h3>
+          <p>Hand-piped and intricately detailed, designed around your theme.</p>
+          <span class="card-link">Order now →</span>
+        </div>
+      </div>
+    </div>
+    <div data-reveal data-delay="120">
+      <div class="card" onclick="openOrder()" tabindex="0" role="button" aria-label="Order chocolate-covered treats">
+        <div class="card-img">
+          <picture>
+            <source type="image/avif" srcset="Photos/web/IMG_3569.avif">
+            <img src="Photos/web/IMG_3569.jpeg" alt="Custom decorated cookies, cherry baby shower theme" loading="lazy" width="900" height="675">
+          </picture>
+        </div>
+        <div class="card-body">
+          <h3>Chocolate-Covered Treats</h3>
+          <p>Oreos, pretzels &amp; strawberries dipped and finished by hand.</p>
+          <span class="card-link">Order now →</span>
+        </div>
+      </div>
+    </div>
+    <div data-reveal data-delay="240">
+      <div class="card" onclick="openOrder()" tabindex="0" role="button" aria-label="Order celebration desserts">
+        <div class="card-img">
+          <picture>
+            <source type="image/avif" srcset="Photos/web/IMG_4317.avif">
+            <img src="Photos/web/IMG_4317.jpeg" alt="Celebration cookies, strawberry birthday set" loading="lazy" width="900" height="675">
+          </picture>
+        </div>
+        <div class="card-body">
+          <h3>Celebration Desserts</h3>
+          <p>Showstopping sets for birthdays, showers and big days.</p>
+          <span class="card-link">Order now →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery" id="gallery">
+  <div class="section-head" data-reveal>
+    <span class="label">@cookiesandcrumbsfl</span>
+    <h2>Fresh from the kitchen</h2>
+  </div>
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="gallery-cell" style="--ci:0">
+      <picture>
+        <source type="image/avif" srcset="Photos/web/IMG_2843.avif">
+        <img src="Photos/web/IMG_2843.jpeg" alt="Birthday cookies" loading="lazy" width="900" height="675">
+      </picture>
+    </div>
+    <div class="gallery-cell" style="--ci:1">
+      <picture>
+        <source type="image/avif" srcset="Photos/web/IMG_3783.avif">
+        <img src="Photos/web/IMG_3783.jpeg" alt="Mickey Mouse birthday cookies" loading="lazy" width="900" height="1200">
+      </picture>
+    </div>
+    <div class="gallery-cell" style="--ci:2">
+      <picture>
+        <source type="image/avif" srcset="Photos/web/IMG_4140.avif">
+        <img src="Photos/web/IMG_4140.jpeg" alt="Swan cookies" loading="lazy" width="900" height="1200">
+      </picture>
+    </div>
+    <div class="gallery-cell" style="--ci:3">
+      <picture>
+        <source type="image/avif" srcset="Photos/web/IMG_3892.avif">
+        <img src="Photos/web/IMG_3892.jpeg" alt="Hello Kitty birthday cookies" loading="lazy" width="900" height="675">
+      </picture>
+    </div>
+    <div class="gallery-cell" style="--ci:4">
+      <picture>
+        <source type="image/avif" srcset="Photos/web/IMG_4485.avif">
+        <img src="Photos/web/IMG_4485.jpeg" alt="Winnie the Pooh cookies" loading="lazy" width="900" height="1200">
+      </picture>
+    </div>
+    <div class="gallery-cell" style="--ci:5">
+      <picture>
+        <source type="image/avif" srcset="Photos/web/IMG_4154.avif">
+        <img src="Photos/web/IMG_4154.jpeg" alt="Cocktail-themed cookies" loading="lazy" width="900" height="675">
+      </picture>
+    </div>
+  </div>
+  <div class="gallery-footer" data-reveal data-delay="120">
+    <a href="https://instagram.com/cookiesandcrumbsfl" target="_blank" rel="noopener" class="btn btn-secondary btn-md">Follow on Instagram</a>
+  </div>
+</section>
+
+<!-- Order CTA -->
+<section class="order-cta" id="order">
+  <div class="order-inner">
+    <div class="order-flourish" data-reveal data-dir="scale">
+      <span class="fl-line"></span>
+      <span style="font-family:var(--font-display);font-size:20px">♥</span>
+      <span class="fl-line"></span>
+    </div>
+    <h2 data-reveal data-delay="80">Ready to create something sweet?</h2>
+    <p data-reveal data-delay="160">All orders are placed through our online shop.</p>
+    <div data-reveal data-delay="230" style="margin-top:6px">
+      <button class="btn btn-primary btn-lg" onclick="openOrder()">Order Now</button>
+    </div>
+  </div>
+</section>
+
+</main><!-- /main -->
+
+<!-- Footer -->
+<footer data-reveal data-dir="fade">
+  <div class="footer-logo">Cookies <span class="amp">&amp;</span> Crumbs</div>
+  <div class="footer-links">
+    <a href="https://instagram.com/cookiesandcrumbsfl" target="_blank" rel="noopener">@cookiesandcrumbsfl</a>
+    <span style="opacity:.4">·</span>
+    <span>Broward, FL</span>
+  </div>
+  <div class="footer-sep"></div>
+  <div class="footer-copy">&copy; 2026 Cookies &amp; Crumbs. All rights reserved.</div>
+</footer>
+
+<!-- Grain -->
+<div class="grain" aria-hidden="true"></div>
+
+<script>
+(() => {
+  /* nav scroll shadow */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 16);
+  }, { passive: true });
+
+  /* mobile nav */
+  const hbg = document.getElementById('hbg');
+  const drawer = document.getElementById('drawer');
+  window.toggleNav = () => {
+    const open = drawer.classList.toggle('open');
+    hbg.classList.toggle('open', open);
+    hbg.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 760) {
+      drawer.classList.remove('open');
+      hbg.classList.remove('open');
+    }
+  });
+
+  /* smooth scroll helper */
+  window.navTo = id => {
+    drawer.classList.remove('open');
+    hbg.classList.remove('open');
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  /* order link */
+  window.openOrder = () =>
+    window.open('https://bakesy.shop/b/cookies-crumbs-1', '_blank', 'noopener');
+
+  /* hero h1 curtain: fire after first paint so fonts are loaded */
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() =>
+      setTimeout(() => document.documentElement.classList.add('page-loaded'), 80)
+    )
+  );
+
+  /* about h2 curtain: IO-triggered when about copy enters view */
+  const aboutCopy = document.querySelector('.about-copy');
+  if (aboutCopy) {
+    const acIO = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      aboutCopy.classList.add('text-on');
+      acIO.disconnect();
+    }, { threshold: 0.2 });
+    acIO.observe(aboutCopy);
+  }
+
+  /* scroll reveal: opacity + transform, triggered by IntersectionObserver */
+  const items = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(({ isIntersecting, target: t }) => {
+      if (!isIntersecting) return;
+      const delay = parseInt(t.dataset.delay || '0', 10);
+      setTimeout(() => t.classList.add('on'), delay);
+      io.unobserve(t);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+  items.forEach(e => io.observe(e));
+
+  /* gallery: stagger-reveal all cells when grid enters view */
+  const galleryGrid = document.getElementById('gallery-grid');
+  if (galleryGrid) {
+    const gIO = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      galleryGrid.classList.add('reveal-in');
+      gIO.disconnect();
+    }, { threshold: 0.08 });
+    gIO.observe(galleryGrid);
+  }
+
+  /* card keyboard activation */
+  document.querySelectorAll('.card[role="button"]').forEach(c => {
+    c.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openOrder(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

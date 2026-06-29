@@ -1,0 +1,20 @@
+.DS_Store
+node_modules/
+.playwright-mcp/
+
+# Original high-res photos — not needed, only Photos/web/ is served
+Photos/Cookies/
+Photos/Headshots/
+
+# Screenshot artefacts from dev sessions
+*.bak
+/*.jpeg
+/*.jpg
+/*.png
+!Cookies_and_Crumbs_Transparent.png
+palais-*.jpeg
+refero-*.jpeg
+animations-*.jpeg
+audit-*.jpeg
+gallery-*.jpeg
+hero-*.jpeg
