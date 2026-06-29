@@ -19,15 +19,15 @@
 <style>
 /* ── Design tokens ──────────────────────────────────────────── */
 :root {
-  --blush-50:  #FBF2F2;
-  --blush-100: #F7E7E7;
-  --blush-200: #F2D9D9;
-  --blush-300: #E9C6C9;
-  --rose-300:  #D29CAF;
-  --mauve-500: #B5708A;
-  --mauve-600: #9E5C77;
-  --mauve-700: #824A61;
-  --mauve-800: #5F3547;
+  --blush-50:  #FFF4F8;
+  --blush-100: #FFE4EF;
+  --blush-200: #FDC8E0;
+  --blush-300: #F8A8CC;
+  --rose-300:  #ED8DB8;
+  --mauve-500: #D4658C;
+  --mauve-600: #BC5078;
+  --mauve-700: #9E3D62;
+  --mauve-800: #72244A;
   --cream-50:  #FFFDFB;
   --cream-100: #FDF8F3;
   --ink-900:   #3B2A30;
@@ -43,17 +43,17 @@
   --text-accent:     var(--mauve-700);  /* dark enough for AA contrast on all surfaces */
   --accent:          var(--mauve-500);  /* decorative: borders, overlays, watermarks */
   --accent-hover:    var(--mauve-600);
-  --border-soft:     #E7D2D4;
+  --border-soft:     #F5B5D5;
   --border-accent:   var(--rose-300);
 
-  --nav-glass-idle:     rgba(242,217,217,.78);  /* blush-200 at 78% */
-  --nav-glass-scrolled: rgba(242,217,217,.94);  /* blush-200 at 94% */
+  --nav-glass-idle:     rgba(253,200,224,.78);
+  --nav-glass-scrolled: rgba(253,200,224,.96);
 
-  --shadow-xs:     0 1px 2px rgba(95,53,71,.06);
-  --shadow-sm:     0 2px 8px rgba(95,53,71,.08);
-  --shadow-md:     0 8px 28px rgba(95,53,71,.11);
-  --shadow-lg:     0 20px 52px rgba(95,53,71,.16);
-  --shadow-accent: 0 10px 32px rgba(130,74,97,.28);  /* mauve-700 tinted */
+  --shadow-xs:     0 1px 2px rgba(114,36,74,.06);
+  --shadow-sm:     0 2px 8px rgba(114,36,74,.08);
+  --shadow-md:     0 8px 28px rgba(114,36,74,.12);
+  --shadow-lg:     0 20px 52px rgba(114,36,74,.18);
+  --shadow-accent: 0 10px 32px rgba(158,61,98,.30);
 
   --radius-sm:   6px;
   --radius-md:   12px;
@@ -594,11 +594,11 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 @media (max-width: 580px) {
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .gallery-grid { grid-template-columns: 1fr; gap: 12px; }
 }
 
 /* gallery cell stagger reveal */
@@ -618,7 +618,7 @@ body {
 }
 
 .gallery-cell {
-  aspect-ratio: 4/5;
+  aspect-ratio: 4/3;
   border-radius: var(--img-radius);
   overflow: hidden;
   position: relative;

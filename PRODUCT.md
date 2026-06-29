@@ -33,7 +33,7 @@ Voice is warm but not gushing. Copy is specific: it names the occasion, the craf
 1. **The work earns the trust.** Real photography leads every section. Illustrations and abstract placeholders are a last resort, never a design choice.
 2. **Personal over polished.** Kacey's voice, her story, and her name appear early. The brand is a person, not a product line.
 3. **Specific, not evocative.** "Hand-piped bridal shower set" beats "made with love." Every detail that can be named should be.
-4. **Elegant restraint.** The brand color is mauve; the typography is Cormorant Garamond. Neither should be over-applied. White space and photo quality carry the page, not decorative flourishes.
+4. **Pink, not dusty.** The brand color is a warm bubblegum rose drawn from the circular logo badge — more saturated and clearly pink than a muted mauve or blush. Surfaces lean pink; the deep rose anchors the announcement bar and footer. Cormorant Garamond provides contrast against the warmth. Neither color nor type should be over-applied.
 5. **One clear path to order.** Every section resolves to an order action. No dead ends, no ambiguity about what to do next.
 
 ## Accessibility & Inclusion
